@@ -1,20 +1,25 @@
 import "./styles/root.scss"
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import Home from "./Home.jsx";
+import React, { useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import Main from "./Main.jsx"
 
-import { HomePageContext } from "./context/HomePageContext.js"
+import { MainPageContext } from "./context/MainPageContext.js"
+import { NAVIGATION } from "./utils"
 
 const rootElement = document.getElementById('root');
 const render = createRoot(rootElement);
-rootElement.ondrop = (event) => event.preventDefault();
-rootElement.ondrag = (event) => event.preventDefault();
 
 const App = () => {
+    const [ currentView, setCurrentView ] = useState(NAVIGATION.HOME)
     return (
-        <HomePageContext.Provider value={null}>
-            <Home/>
-        </HomePageContext.Provider>
+        <MainPageContext.Provider 
+            value={{
+                currentView: currentView,
+                switchView: setCurrentView
+            }}
+        >
+            <Main/>
+        </MainPageContext.Provider>
     );
 }
 

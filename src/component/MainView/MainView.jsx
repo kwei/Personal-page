@@ -1,12 +1,33 @@
 import "./MainView.scss"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext } from "react"
+import { MainPageContext } from "../../context/MainPageContext"
+import { NAVIGATION } from "../../utils"
+import Personal from "../Personal/Personal.jsx"
+import Project from "../Project/Project.jsx"
+import Home from "../Home/Home.jsx"
+import Contact from "../Contact/Contact.jsx"
 
 const MainView = () => {
-    // const { setModalBody } = useContext(HomePageContext)
+    const { currentView } = useContext(MainPageContext)
+
+    const content = () => {
+        switch (currentView) {
+            case NAVIGATION.HOME:
+                return <Home></Home>
+            case NAVIGATION.PERSONAL:
+                return <Personal></Personal>
+            case NAVIGATION.PROJECT:
+                return <Project></Project>
+            case NAVIGATION.CONTACT:
+                return <Contact></Contact>
+            default:
+                return <Home></Home>
+        }
+    }
 
     return (
         <div className="view-container">
-            
+            { content() }
         </div>
     )
 }

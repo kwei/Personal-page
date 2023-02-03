@@ -1,11 +1,9 @@
-import "../styles/HomePage.scss"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import "../styles/MainPage.scss"
+import React from "react"
 import Nav from "../component/Navigation/Nav.jsx"
 import MainView from "../component/MainView/MainView.jsx"
 
-const HomePage = () => {
-    // const { setModalBody } = useContext(HomePageContext)
-
+const MainPage = () => {
     return (
         <div className="page-container">
             <Nav></Nav>
@@ -14,4 +12,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default MainPage

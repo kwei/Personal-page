@@ -1,23 +1,18 @@
 import "./Nav.scss"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { MdOutlineMenu, MdClose, MdHome, MdContacts, MdDashboard, MdAccountCircle } from "react-icons/md"
-
-const NAVIGATION = Object.freeze({
-    HOME: 0,
-    SELF_INTRO: 1,
-    SIDE_PROJECT: 2,
-    CONTACT: 3
-})
+import { NAVIGATION } from "../../utils"
+import { MainPageContext } from "../../context/MainPageContext"
 
 const Nav = () => {
-    // const { setModalBody } = useContext(HomePageContext)
+    const { switchView } = useContext(MainPageContext)
     const [ isExtend, setIsExtend ] = useState(false)
     const navRef = useRef(null)
     const slideBarRef = useRef(null)
 
     function handleExtendNav () {
         setIsExtend(prevState => {
-            if (!prevState && navRef.current) navRef.current.style.width = "168px"
+            if (!prevState && navRef.current) navRef.current.style.width = "128px"
             else if (navRef.current) navRef.current.style.width = "40px"
             return !prevState
         })
@@ -28,16 +23,7 @@ const Nav = () => {
         if (!element) return false
         if (!slideBarRef.current) return false
         slideBarRef.current.style.top = element.offsetTop + "px"
-        switch (navType) {
-            case NAVIGATION.HOME:
-                break
-            case NAVIGATION.SELF_INTRO:
-                break
-            case NAVIGATION.SIDE_PROJECT:
-                break
-            case NAVIGATION.CONTACT:
-                break
-        }
+        switchView(navType)
     }
 
     return (
@@ -63,13 +49,13 @@ const Nav = () => {
                     <MdHome></MdHome>
                     <span>Home</span>
                 </div>
-                <div className="self-intro" onClick={(e) => handleNavigating(e, NAVIGATION.SELF_INTRO)}>
+                <div className="personal" onClick={(e) => handleNavigating(e, NAVIGATION.PERSONAL)}>
                     <MdAccountCircle></MdAccountCircle>
-                    <span>Self Introduction</span>
+                    <span>Personal</span>
                 </div>
-                <div className="side-project" onClick={(e) => handleNavigating(e, NAVIGATION.SIDE_PROJECT)}>
+                <div className="project" onClick={(e) => handleNavigating(e, NAVIGATION.PROJECT)}>
                     <MdDashboard></MdDashboard>
-                    <span>Side Project</span>
+                    <span>Project</span>
                 </div>
                 <div className="contact" onClick={(e) => handleNavigating(e, NAVIGATION.CONTACT)}>
                     <MdContacts></MdContacts>

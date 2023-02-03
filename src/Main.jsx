@@ -2,17 +2,17 @@ import React, { Suspense } from "react";
 
 import Loader from "./component/Loader/Loader.jsx";
 import ErrorBoundary from "./component/ErrorBoundary/ErrorBoundary.jsx";
-import HomePage from "./pages/HomePage.jsx"
+import MainPage from "./pages/MainPage.jsx"
 
 
-const Home = () => {
+const Main = () => {
     return (
         <ErrorBoundary fallback={<p>load failed</p>}>
             <Suspense fallback={<Loader/>}>
-                <HomePage/>
+                <MainPage/>
             </Suspense>
         </ErrorBoundary>
     );
 };
 
-export default Home;
+export default Main;
