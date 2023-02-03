@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+body::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+    margin: 2px;
+}
+body::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.534);
+}
+body::-webkit-scrollbar-thumb:hover {
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.781);
+}
+body::-webkit-scrollbar-thumb:active {
+    border-radius: 0.5rem;
+    background-color: rgb(128, 128, 128);
+}
+
+#root {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
