@@ -1,6 +1,5 @@
 import "../styles/HomePage.scss"
 import React, { useContext, useEffect, useRef, useState } from "react"
-import Me from "../component/Me/Me.jsx"
 
 const HomePage = () => {
     // const { setModalBody } = useContext(HomePageContext)
