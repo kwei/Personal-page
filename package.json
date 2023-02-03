@@ -1,7 +1,7 @@
 {
-  "name": "self",
+  "name": "personal-page",
   "version": "1.0.0",
-  "homepage": "https://github.com/kwei/self#readme",
+  "homepage": "https://github.com/kwei/Personal-page#readme",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kwei/self.git"
+    "url": "git+https://github.com/kwei/Personal-page.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kwei/self/issues"
+    "url": "https://github.com/kwei/Personal-page/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
