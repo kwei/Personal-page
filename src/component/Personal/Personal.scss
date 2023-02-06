@@ -71,9 +71,27 @@
                 align-items: center;
                 width: 104px;
                 justify-content: space-between;
-                svg {
+                a {
+                    position: relative;
+                    display: flex;
                     width: 24px;
-                    color: var(--primary);
+                    height: 24px;
+                    align-items: center;
+                    cursor: pointer;
+                    svg {
+                        width: 100%;
+                        color: var(--primary);
+                        transition: all 0.2s ease-in-out;
+                    }
+                    &:hover {
+                        svg {
+                            filter: 
+                                drop-shadow(0 0 1px white)
+                                drop-shadow(0 0 2px var(--primary))
+                                drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))
+                                drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+                        }
+                    }
                 }
             }
             &::after {

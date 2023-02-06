@@ -15,9 +15,9 @@ const Personal = () => {
                     <div className="divider"></div>
                     <div className="position">WEB FRONT-END ENGINEER</div>
                     <div className="social-link">
-                        <FaTwitter></FaTwitter>
-                        <FaFacebookF></FaFacebookF>
-                        <FaInstagram></FaInstagram>
+                        <a href="https://twitter.com/kaiwei64326869"><FaTwitter></FaTwitter></a>
+                        <a href="https://www.facebook.com/profile.php?id=100005738350593"><FaFacebookF></FaFacebookF></a>
+                        <a href="https://www.instagram.com/ykw__1031/"><FaInstagram></FaInstagram></a>
                     </div>
                 </div>
                 <div className="self-intro">
