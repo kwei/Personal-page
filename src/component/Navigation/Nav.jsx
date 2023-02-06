@@ -1,14 +1,18 @@
 import "./Nav.scss"
-import React, { useContext, useRef, useState } from "react"
+import React, { useContext, useRef, useState, useEffect } from "react"
 import { MdOutlineMenu, MdClose, MdHome, MdContacts, MdDashboard, MdAccountCircle } from "react-icons/md"
 import { NAVIGATION } from "../../utils"
 import { MainPageContext } from "../../context/MainPageContext"
 
 const Nav = () => {
-    const { switchView } = useContext(MainPageContext)
+    const { currentView, switchView } = useContext(MainPageContext)
     const [ isExtend, setIsExtend ] = useState(false)
     const navRef = useRef(null)
     const slideBarRef = useRef(null)
+    const homeNavRef = useRef(null)
+    const personalNavRef = useRef(null)
+    const projectNavRef = useRef(null)
+    const contactNavRef = useRef(null)
 
     function handleExtendNav () {
         setIsExtend(prevState => {
@@ -25,6 +29,14 @@ const Nav = () => {
         slideBarRef.current.style.top = element.offsetTop + "px"
         switchView(navType)
     }
+
+    useEffect(() => {
+        if (!slideBarRef.current) return false
+        if (currentView === NAVIGATION.HOME) slideBarRef.current.style.top = homeNavRef.current.offsetTop + "px"
+        else if (currentView === NAVIGATION.PERSONAL) slideBarRef.current.style.top = personalNavRef.current.offsetTop + "px"
+        else if (currentView === NAVIGATION.PROJECT) slideBarRef.current.style.top = projectNavRef.current.offsetTop + "px"
+        else slideBarRef.current.style.top = contactNavRef.current.offsetTop + "px"
+    }, [currentView])
 
     return (
         <div ref={navRef} className="nav-container">
@@ -45,19 +57,19 @@ const Nav = () => {
             </div>
             <div className="body">
                 <span ref={slideBarRef} className="slide-bar"></span>
-                <div className="home" onClick={(e) => handleNavigating(e, NAVIGATION.HOME)}>
+                <div ref={homeNavRef} className="home" onClick={(e) => handleNavigating(e, NAVIGATION.HOME)}>
                     <MdHome></MdHome>
                     <span>Home</span>
                 </div>
-                <div className="personal" onClick={(e) => handleNavigating(e, NAVIGATION.PERSONAL)}>
+                <div ref={personalNavRef} className="personal" onClick={(e) => handleNavigating(e, NAVIGATION.PERSONAL)}>
                     <MdAccountCircle></MdAccountCircle>
                     <span>Personal</span>
                 </div>
-                <div className="project" onClick={(e) => handleNavigating(e, NAVIGATION.PROJECT)}>
+                <div ref={projectNavRef} className="project" onClick={(e) => handleNavigating(e, NAVIGATION.PROJECT)}>
                     <MdDashboard></MdDashboard>
                     <span>Project</span>
                 </div>
-                <div className="contact" onClick={(e) => handleNavigating(e, NAVIGATION.CONTACT)}>
+                <div ref={contactNavRef} className="contact" onClick={(e) => handleNavigating(e, NAVIGATION.CONTACT)}>
                     <MdContacts></MdContacts>
                     <span>Contact</span>
                 </div>

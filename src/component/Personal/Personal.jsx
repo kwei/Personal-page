@@ -1,8 +1,16 @@
 import "./Personal.scss"
-import React from "react"
+import React, { useContext } from "react"
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa"
+import { MainPageContext } from "../../context/MainPageContext"
+import { NAVIGATION } from "../../utils"
 
 const Personal = () => {
+    const { switchView } = useContext(MainPageContext)
+
+    function handleNav2Project () {
+        switchView(NAVIGATION.PROJECT)
+    }
+
     return (
         <div className="personal-page">
             <div className="card">
@@ -27,7 +35,7 @@ const Personal = () => {
                     </div>
                     <div className="nav-link">
                         <button className="primary">RESUME</button>
-                        <button className="secondary">PROJECTS</button>
+                        <button className="secondary" onClick={handleNav2Project}>PROJECTS</button>
                     </div>
                     <div className="intro-text">
                         Hi, I'm KW. I have much patient and interest of programming.
