@@ -2,6 +2,231 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    align-items: center;
+    width: calc(100% - 3rem);
+    height: calc(100% - 3rem);
+    padding: 1.5rem;
+}
+.contact-page > .contact-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: calc(90% - 3rem);
+    height: auto;
+    margin: auto;
+    border-radius: 0.5rem;
+    background-color: var(--black);
+    padding: 1.5rem;
+}
+.contact-page > .contact-card > div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.contact-info {
+    gap: 1rem;
+    .name {
+        position: relative;
+        font-size: larger;
+        color: var(--text);
+    }
+    .email {
+        position: relative;
+        font-size: medium;
+        color: var(--text);
+    }
+    .work-address {
+        position: relative;
+        font-size: medium;
+        color: var(--text);
+    }
+}
+
+.email-form {
+    gap: 1.5rem;
+    .title {
+        position: relative;
+        h1 {
+            position: relative;
+            margin: 0;
+            color: var(--primary);
+        }
+    }
+    .form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+    .form > div {
+        position: relative;
+        input {
+            position: relative;
+            width: calc(100% - 16px);
+            height: 2rem;
+            padding: 5px 8px;
+            border-radius: 0.5rem;
+            outline: none;
+            border: 1px solid var(--black);
+            background-color: whitesmoke;
+            font-size: small;
+        }
+        textarea {
+            position: relative;
+            width: calc(100% - 16px);
+            height: 4rem;
+            padding: 5px 8px;
+            border-radius: 0.5rem;
+            outline: none;
+            border: 1px solid var(--black);
+            background-color: whitesmoke;
+            resize: none;
+            font-size: small;
+        }
+    }
+    .btn-submit {
+        position: relative;
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        button {
+            position: relative;
+            width: 80px;
+            height: 40px;
+            border-radius: 0.5rem;
+            background-color: var(--primary);
+            border: 1px solid var(--black);
+            color: var(--black);
+            font-weight: 600;
+            cursor: pointer;
+            &:hover {
+                background-color: var(--info);
+            }
+            &:active {
+                border: 1px solid var(--info);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 940px) {
+    .contact-page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% - 3rem);
+        height: calc(100% - 3rem);
+        padding: 1.5rem;
+    }
+    .contact-page > .contact-card {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: calc(100% - 3rem);
+        height: auto;
+        margin: auto;
+        border-radius: 0.5rem;
+        background-color: var(--black);
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+    .contact-page > .contact-card > div {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .contact-info {
+        gap: 1rem;
+        .name {
+            position: relative;
+            font-size: larger;
+            color: var(--text);
+        }
+        .email {
+            position: relative;
+            font-size: medium;
+            color: var(--text);
+        }
+        .work-address {
+            position: relative;
+            font-size: medium;
+            color: var(--text);
+        }
+    }
+    
+    .email-form {
+        gap: 1.5rem;
+        .title {
+            position: relative;
+            h1 {
+                position: relative;
+                margin: 0;
+                color: var(--primary);
+            }
+        }
+        .form {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 0.5rem;
+        }
+        .form > div {
+            position: relative;
+            input {
+                position: relative;
+                width: calc(100% - 16px);
+                height: 2rem;
+                padding: 5px 8px;
+                border-radius: 0.5rem;
+                outline: none;
+                border: 1px solid var(--black);
+                background-color: whitesmoke;
+                font-size: small;
+            }
+            textarea {
+                position: relative;
+                width: calc(100% - 16px);
+                height: 4rem;
+                padding: 5px 8px;
+                border-radius: 0.5rem;
+                outline: none;
+                border: 1px solid var(--black);
+                background-color: whitesmoke;
+                resize: none;
+                font-size: small;
+            }
+        }
+        .btn-submit {
+            position: relative;
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            button {
+                position: relative;
+                width: 80px;
+                height: 40px;
+                border-radius: 0.5rem;
+                background-color: var(--primary);
+                border: 1px solid var(--black);
+                color: var(--black);
+                font-weight: 600;
+                cursor: pointer;
+                &:hover {
+                    background-color: var(--info);
+                }
+                &:active {
+                    border: 1px solid var(--info);
+                }
+            }
+        }
+    }
 }

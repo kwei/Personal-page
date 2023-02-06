@@ -10,7 +10,7 @@ const rootElement = document.getElementById('root');
 const render = createRoot(rootElement);
 
 const App = () => {
-    const [ currentView, setCurrentView ] = useState(NAVIGATION.PROJECT)
+    const [ currentView, setCurrentView ] = useState(NAVIGATION.CONTACT)
     return (
         <MainPageContext.Provider 
             value={{
