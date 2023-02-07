@@ -12,7 +12,8 @@ module.exports = {
     entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'static/js/main.js'
+        filename: 'static/js/main.js',
+        clean: true
     },
     module: {
         rules: [
@@ -43,7 +44,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[ext]',
+                            name: 'images/[name].[ext]',
                             type: 'asset/resource'
                         }  
                     }

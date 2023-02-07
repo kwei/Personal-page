@@ -3,7 +3,7 @@ import React, { useContext } from "react"
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa"
 import { MainPageContext } from "../../context/MainPageContext"
 import { NAVIGATION } from "../../utils"
-import profilePhoto from "../../images/profile-photo.jpg"
+import ProfilePhoto from "../../images/profile-photo.jpg"
 
 const Personal = () => {
     const { switchView } = useContext(MainPageContext)
@@ -16,7 +16,7 @@ const Personal = () => {
         <div className="personal-page">
             <div className="card">
                 <div className="profile">
-                    <img alt="" src={profilePhoto}></img>
+                    <img alt="" src={ProfilePhoto}></img>
                     <div className="name">
                         <div className="last-name">YEH</div>
                         <div className="first-name">KAI-WEI</div>

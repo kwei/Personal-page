@@ -1,5 +1,7 @@
 import "./Project.scss"
 import React, { useState } from "react"
+import IMG_MD_WEB from "../../images/md-web.png"
+import IMG_DC_BOT from "../../images/discord-bot.png"
 
 const Project = () => {
 
@@ -22,7 +24,7 @@ const Project = () => {
         <div className="project-page">
             <div className="project" style={{ height: showMore[PROJECTS.MD_WEB]? "380px" : "300px" }}>
                 <div className="thumbnail">
-                    <img alt="" src="md-web.png"></img>
+                    <img alt="" src={IMG_MD_WEB}></img>
                 </div>
                 <div className="info">
                     <h3>Markdown Editor ( WEB )</h3></div>
@@ -44,7 +46,7 @@ const Project = () => {
 
             <div className="project" style={{ height: showMore[PROJECTS.DC_BOT]? "380px" : "300px" }}>
                 <div className="thumbnail">
-                    <img alt="" src="discord-bot.png"></img>
+                    <img alt="" src={IMG_DC_BOT}></img>
                 </div>
                 <div className="info"><h3>Discord Lyric Searching Bot</h3></div>
                 <div className="keywords">
