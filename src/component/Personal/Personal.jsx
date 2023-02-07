@@ -16,7 +16,7 @@ const Personal = () => {
         <div className="personal-page">
             <div className="card">
                 <div className="profile">
-                    <img alt="" src={ProfilePhoto}></img>
+                    <img alt="" src={"./images/profile-photo.jpg"}></img>
                     <div className="name">
                         <div className="last-name">YEH</div>
                         <div className="first-name">KAI-WEI</div>

@@ -24,7 +24,7 @@ const Project = () => {
         <div className="project-page">
             <div className="project" style={{ height: showMore[PROJECTS.MD_WEB]? "380px" : "300px" }}>
                 <div className="thumbnail">
-                    <img alt="" src={IMG_MD_WEB}></img>
+                    <img alt="" src={"./images/md-web.png"}></img>
                 </div>
                 <div className="info">
                     <h3>Markdown Editor ( WEB )</h3></div>
@@ -46,7 +46,7 @@ const Project = () => {
 
             <div className="project" style={{ height: showMore[PROJECTS.DC_BOT]? "380px" : "300px" }}>
                 <div className="thumbnail">
-                    <img alt="" src={IMG_DC_BOT}></img>
+                    <img alt="" src={"./images/discord-bot.png"}></img>
                 </div>
                 <div className="info"><h3>Discord Lyric Searching Bot</h3></div>
                 <div className="keywords">

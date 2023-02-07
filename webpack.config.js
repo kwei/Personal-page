@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const env = (process.env.NODE_ENV || "development");
 
 module.exports = {
-    mode: 'development',
+    mode: env,
     entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
