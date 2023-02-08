@@ -15,10 +15,10 @@ const Contact = () => {
                     <div className="title"><h1>Keep in TOUCH</h1></div>
                     <div className="form">
                         <div className="name">
-                            <input type="text" name="name" placeholder="輸入您的名字"></input>
+                            <input type="text" name="name" placeholder="輸入您的名字" autoComplete="off"></input>
                         </div>
                         <div className="email">
-                            <input type="email" name="email" placeholder="輸入您的信箱"></input>
+                            <input type="email" name="email" placeholder="輸入您的信箱" autoComplete="off"></input>
                         </div>
                         <div className="text">
                             <textarea placeholder="想對我說的話..."></textarea>

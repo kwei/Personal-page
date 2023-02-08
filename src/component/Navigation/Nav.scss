@@ -43,44 +43,6 @@
         flex: 1;
         gap: 2rem;
 
-        div {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            cursor: pointer;
-            overflow: hidden;
-
-            svg {
-                width: var(--icon-size);
-                height: var(--icon-size);
-                color: var(--icon-color);
-            }
-            span {
-                position: absolute;
-                display: inline-block;
-                left: calc(var(--icon-size) + 0.5rem);
-                color: var(--info);
-                white-space: nowrap;
-            }
-            &:hover {
-                svg {
-                    color: var(--primary);
-                }
-                span {
-                    color: var(--primary);
-                }
-            }
-            &:active {
-                svg {
-                    color: var(--highlight);
-                }
-                span {
-                    color: var(--highlight);
-                }
-            }
-        }
-
         .slide-bar {
             position: absolute;
             display: block;
@@ -91,6 +53,43 @@
             left: -0.5rem;
             background-color: var(--info);
             transition: all 0.3s ease-in-out;
+        }
+    }
+    .body > div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+        overflow: hidden;
+
+        svg {
+            width: var(--icon-size);
+            height: var(--icon-size);
+            color: var(--icon-color);
+        }
+        span {
+            position: absolute;
+            display: inline-block;
+            left: calc(var(--icon-size) + 0.5rem);
+            color: var(--info);
+            white-space: nowrap;
+        }
+        &:hover {
+            svg {
+                color: var(--primary);
+            }
+            span {
+                color: var(--primary);
+            }
+        }
+        &:active {
+            svg {
+                color: var(--highlight);
+            }
+            span {
+                color: var(--highlight);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 import "./Nav.scss"
 import React, { useContext, useRef, useState, useEffect } from "react"
 import { MdOutlineMenu, MdClose, MdHome, MdContacts, MdDashboard, MdAccountCircle } from "react-icons/md"
+import { IoGameController } from "react-icons/io5";
 import { NAVIGATION } from "../../utils"
 import { MainPageContext } from "../../context/MainPageContext"
 
@@ -13,6 +14,7 @@ const Nav = () => {
     const personalNavRef = useRef(null)
     const projectNavRef = useRef(null)
     const contactNavRef = useRef(null)
+    const gameNavRef = useRef(null)
 
     function handleExtendNav () {
         setIsExtend(prevState => {
@@ -35,7 +37,8 @@ const Nav = () => {
         if (currentView === NAVIGATION.HOME) slideBarRef.current.style.top = homeNavRef.current.offsetTop + "px"
         else if (currentView === NAVIGATION.PERSONAL) slideBarRef.current.style.top = personalNavRef.current.offsetTop + "px"
         else if (currentView === NAVIGATION.PROJECT) slideBarRef.current.style.top = projectNavRef.current.offsetTop + "px"
-        else slideBarRef.current.style.top = contactNavRef.current.offsetTop + "px"
+        else if (currentView === NAVIGATION.CONTACT) slideBarRef.current.style.top = contactNavRef.current.offsetTop + "px"
+        else slideBarRef.current.style.top = gameNavRef.current.offsetTop + "px"
     }, [currentView])
 
     return (
@@ -72,6 +75,10 @@ const Nav = () => {
                 <div ref={contactNavRef} className="contact" onClick={(e) => handleNavigating(e, NAVIGATION.CONTACT)}>
                     <MdContacts></MdContacts>
                     <span>Contact</span>
+                </div>
+                <div ref={gameNavRef} className="game" onClick={(e) => handleNavigating(e, NAVIGATION.GAME)}>
+                    <IoGameController></IoGameController>
+                    <span>Games</span>
                 </div>
             </div>
         </div>
