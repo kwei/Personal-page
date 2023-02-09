@@ -1,6 +1,6 @@
 import "./Game.scss"
 import React, { useEffect, useRef, useState } from "react"
-import { MdArrowForward, MdBackspace, MdKeyboardReturn } from "react-icons/md"
+import { MdArrowForward, MdBackspace, MdKeyboardReturn, MdClose, MdArrowDropDown, MdArrowDropUp } from "react-icons/md"
 
 const NUMBER_BASIS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -21,6 +21,8 @@ const Game = () => {
     const [ record, setRecord ] = useState([])
     const [ isWin, setIsWin ] = useState(false)
     const [ isAlert, setIsAlert ] = useState(false)
+    const [ showRule, setShowRule ] = useState(false)
+    const [ score, setScore ] = useState(0)
     const number = useRef([])
 
     useEffect(() => {
@@ -74,6 +76,7 @@ const Game = () => {
             inputRef.current.disabled = true
             setIsWin(true)
             setIsAlert(true)
+            setScore(record.length)
         }
     }
 
@@ -99,11 +102,31 @@ const Game = () => {
         setIsAlert(false)
     }
 
+    function handleShowRule () {
+        setShowRule(prevState => !prevState)
+    }
+
+    function handleShareScore () {
+
+    }
+
     return (
         <div className="game-page">
             <div className="rule">
-                <h2>RULES</h2>
-                <span></span>
+                <h2 onClick={handleShowRule}>
+                    Rules of Bulls and Cows 
+                    <MdArrowDropDown style={{ opacity: showRule? "0":"1", transform: showRule? "rotateX(180deg)":"" }}></MdArrowDropDown>
+                    <MdArrowDropUp style={{ opacity: showRule? "1":"0", transform: showRule? "":"rotateX(-180deg)" }}></MdArrowDropUp>
+                </h2>
+                { showRule &&
+                    <ol>
+                        <li>每次輸入 4 個不相同的數字，從 0 至 9 。</li>
+                        <li>將 4 個數字分開依序判別，若輸入的數字與答案相符，則記 1 個 A 。</li>
+                        <li>將 4 個數字分開依序判別，若輸入的數字與答案不符，但該數字存在於答案的某個位數，則記 1 個 B 。</li>
+                        <li>最終以獲得 4 個 A 為獲勝條件。</li>
+                        <li>每次作答將會記錄次數 1 次，次數愈低代表分數愈高。</li>
+                    </ol>
+                }
             </div>
             <div className="body">
                 <div className="log">
@@ -148,7 +171,23 @@ const Game = () => {
                 </div>
             </div>
             <div className="alert" style={{ display: (isAlert && isWin)? "flex":"none"}} onClick={handleCloseAlert}>
-                <div className="card">WIN!</div>
+                <div className="card">
+                    <div className="close"><MdClose onClick={handleCloseAlert}></MdClose></div>
+                    <div className="header">
+                        <h3>YOU WIN!</h3>
+                    </div>
+                    <div className="body">
+                        <div className="info">
+                            <span>You have won!</span>
+                            <span>This time, your score is {score+1} (steps).</span>
+                            <span>Keep up the good work!</span>
+                        </div>
+                        <div className="btn">
+                            <button onClick={handleShareScore}>分享成績</button>
+                            <button onClick={handleNewGame}>開新一局</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

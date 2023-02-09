@@ -11,17 +11,38 @@
     .rule {
         position: relative;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         width: calc(100% - 3rem);
         padding: 1.5rem;
         border-radius: 0.5rem;
         background-color: var(--black);
+        color: var(--text);
 
         h2 {
+            position: relative;
+            display: flex;
+            align-items: center;
             margin: 0;
             width: 100%;
-            text-align: center;
-            color: var(--text);
+            justify-content: center;
+            cursor: pointer;
+            &:hover {
+                color: var(--info);
+            }
+            svg {
+                position: absolute;
+                right: 0;
+                width: 40px;
+                height: 40px;
+                transition: all 0.2s ease-in-out;
+            }
+        }
+        ol {
+            margin: 0;
+            gap: 0.5rem;
+            li {
+                margin: 0.5rem 0;
+            }
         }
     }
 
@@ -30,6 +51,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        flex: 1;
         justify-content: space-between;
         .log {
             position: relative;
@@ -37,6 +59,7 @@
             flex-direction: column;
             align-items: center;
             width: 40%;
+            height: 100%;
             gap: 0.5rem;
             .title {
                 position: relative;
@@ -80,8 +103,8 @@
                 border-radius: 1rem;
                 padding: 0.5rem;
                 width: calc(70% - 1rem);
-                min-height: 100px;
-                max-height: 400px;
+                flex: 1;
+                min-height: 250px;
                 overflow-y: auto;
                 background-color: var(--black);
                 gap: 0.5rem;
@@ -214,13 +237,95 @@
         left: 0;
         right: 0;
         bottom: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.39);
+        background: rgba( 0, 0, 0, 0.4 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 6px );
+        -webkit-backdrop-filter: blur( 6px );
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
         .card {
             position: relative;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
             margin: auto;
+            width: 300px;
+            background-color: #f5f5f5;
+            border-radius: 1.5rem;
+            animation: popup 0.3s ease-in-out;
+            .close {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                height: 24px;
+                justify-content: flex-end;
+                svg {
+                    cursor: pointer;
+                    color: var(--gray);
+                    &:hover {
+                        color: black;
+                    }
+                }
+            }
+            .header {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                h3 {
+                    margin-top: 0;
+                }
+            }
+            .body {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                .info {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .btn {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1rem;
+                    width: 100%;
+                    button {
+                        width: 78px;
+                        height: 36px;
+                        border-radius: 0.5rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                    }
+                    & > button:nth-child(1) {
+                        border: 1px solid var(--info);
+                        color: var(--primary);
+                        &:hover {
+                            border: 1px solid var(--primary);
+                        }
+                        &:active {
+                            border: 1px solid var(--highlight);
+                            color: var(--highlight);
+                        }
+                    }
+                    & > button:nth-child(2) {
+                        background-color: var(--primary);
+                        border: 1px solid var(--black);
+                        &:hover {
+                            background-color: var(--info);
+                        }
+                        &:active {
+                            background-color: var(--highlight);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -231,5 +336,352 @@
     }
     100% {
         transform: translate(0, 0);
+    }
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0);
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 940px) {
+    .game-page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% - 4rem);
+        height: calc(100% - 4rem);
+        padding: 2rem;
+        gap: 2rem;
+        overflow-y: auto;
+    
+        .rule {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 3rem);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--black);
+            color: var(--text);
+            h2 {
+                position: relative;
+                display: flex;
+                align-items: center;
+                margin: 0;
+                width: 100%;
+                justify-content: center;
+                cursor: pointer;
+                &:hover {
+                    color: var(--info);
+                }
+                svg {
+                    position: absolute;
+                    right: 0;
+                    width: 40px;
+                    height: 40px;
+                    transition: all 0.2s ease-in-out;
+                }
+            }
+            ol {
+                margin: 0;
+                gap: 0.5rem;
+                li {
+                    margin: 0.5rem 0;
+                }
+            }
+        }
+    
+        .body {
+            position: relative;
+            display: flex;
+            flex-direction: column-reverse;
+            width: 100%;
+            justify-content: space-between;
+            gap: 1rem;
+            .log {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 0.5rem;
+                .title {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    color: var(--text);
+                    justify-content: space-between;
+                    & > span:nth-child(1) {
+                        position: relative;
+                        display: block;
+                        font-size: larger;
+                        font-weight: bold;
+                    }
+                    & > span:nth-child(2) {
+                        position: relative;
+                        display: inline-block;
+                        font-size: medium;
+                        text-align: center;
+                        font-weight: 500;
+                        color: var(--text);
+                        border: 1px solid var(--gray);
+                        background-color: var(--black);
+                        border-radius: 0.5rem;
+                        padding: 0.5rem 1rem;
+                        cursor: pointer;
+                        &:hover {
+                            color: var(--info);
+                        }
+                        &:active {
+                            border: 1px solid var(--black);
+                            color: var(--highlight);
+                        }
+                    }
+                }
+                .item-list {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    border-radius: 1rem;
+                    padding: 0.5rem;
+                    width: calc(100% - 1rem);
+                    flex: 1;
+                    min-height: 250px;
+                    overflow-y: auto;
+                    background-color: var(--black);
+                    gap: 0.5rem;
+                    &::-webkit-scrollbar {
+                        width: 5px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        border-radius: 0.5rem;
+                        margin: 2px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 0.5rem;
+                        background-color: rgba(128, 128, 128, 0.534);
+                    }
+                    &::-webkit-scrollbar-thumb:hover {
+                        border-radius: 0.5rem;
+                        background-color: rgba(128, 128, 128, 0.781);
+                    }
+                    &::-webkit-scrollbar-thumb:active {
+                        border-radius: 0.5rem;
+                        background-color: rgb(128, 128, 128);
+                    }
+    
+                    .item {
+                        position: relative;
+                        display: flex;
+                        width: calc(100% - 2rem);
+                        height: calc(50px - 2rem);
+                        align-items: center;
+                        padding: 1rem;
+                        background-color: var(--gray);
+                        border-radius: calc(1rem - 0.5rem);
+                        justify-content: space-between;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                        animation: slideIn 0.2s ease-in-out;
+                        span {
+                            font-size: medium;
+                            color: var(--text);
+                        }
+                        svg {
+                            height: 100%;
+                            color: var(--text);
+                        }
+                        &:hover {
+                            background-color: var(--primary);
+                        }
+                    }
+                }
+            }
+            .keyboard {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 0.5rem;
+                .title {
+                    position: relative;
+                    display: block;
+                    font-size: larger;
+                    font-weight: bold;
+                    color: var(--text);
+                }
+                .input {
+                    input {
+                        width: 100%;
+                        font-size: medium;
+                        padding: 0.5rem;
+                        outline: none;
+                        border-width: 0px;
+                        border-radius: 0.5rem;
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            appearance: none;
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                        background-color: whitesmoke;
+                    }
+                }
+                .board {
+                    --number-size: 45px;
+    
+                    position: relative;
+                    display: flex;
+                    width: calc((var(--number-size) * 3) + 1rem);
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    & > div {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0.5rem;
+                        text-align: center;
+                        background-color: var(--black);
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                        color: var(--text);
+                        &:hover {
+                            background-color: var(--primary);
+                        }
+                        &:active {
+                            background-color: var(--info);
+                            color: var(--black);
+                        }
+                    }
+                    .clear {
+                        width: calc((var(--number-size) * 2) - 0.5rem);
+                    }
+                    .backspace {
+                        width: calc(var(--number-size) - 1rem);
+                    }
+                    .number {
+                        width: calc(var(--number-size) - 1rem);
+                        height: calc(var(--number-size) - 1rem);
+                    }
+                    .enter {
+                        width: calc((var(--number-size) * 2) - 0.5rem);
+                    }
+                }
+            }
+        }
+    
+        .alert {
+            position: absolute;
+            display: flex;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba( 0, 0, 0, 0.4 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 6px );
+            -webkit-backdrop-filter: blur( 6px );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            z-index: 1;
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+                margin: auto;
+                width: 250px;
+                background-color: #f5f5f5;
+                border-radius: 1.5rem;
+                z-index: 2;
+                animation: popup 0.2s ease-in-out;
+                .close {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    height: 24px;
+                    justify-content: flex-end;
+                    svg {
+                        cursor: pointer;
+                        color: var(--gray);
+                        &:hover {
+                            color: black;
+                        }
+                    }
+                }
+                .header {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    h3 {
+                        margin-top: 0;
+                    }
+                }
+                .body {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    .info {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                    .btn {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 1rem;
+                        width: 100%;
+                        button {
+                            width: 78px;
+                            height: 36px;
+                            border-radius: 0.5rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                        }
+                        & > button:nth-child(1) {
+                            border: 1px solid var(--info);
+                            color: var(--primary);
+                            &:hover {
+                                border: 1px solid var(--primary);
+                            }
+                            &:active {
+                                border: 1px solid var(--highlight);
+                                color: var(--highlight);
+                            }
+                        }
+                        & > button:nth-child(2) {
+                            background-color: var(--primary);
+                            border: 1px solid var(--black);
+                            &:hover {
+                                background-color: var(--info);
+                            }
+                            &:active {
+                                background-color: var(--highlight);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
