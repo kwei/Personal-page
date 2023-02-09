@@ -23,7 +23,7 @@
             display: flex;
             align-items: center;
             margin: 0;
-            width: 100%;
+            width: calc(100% - 40px);
             justify-content: center;
             cursor: pointer;
             &:hover {
@@ -31,7 +31,7 @@
             }
             svg {
                 position: absolute;
-                right: 0;
+                right: -40px;
                 width: 40px;
                 height: 40px;
                 transition: all 0.2s ease-in-out;
@@ -377,7 +377,7 @@
                 display: flex;
                 align-items: center;
                 margin: 0;
-                width: 100%;
+                width: calc(100% - 40px);
                 justify-content: center;
                 cursor: pointer;
                 &:hover {
@@ -385,7 +385,7 @@
                 }
                 svg {
                     position: absolute;
-                    right: 0;
+                    right: -40px;
                     width: 40px;
                     height: 40px;
                     transition: all 0.2s ease-in-out;
