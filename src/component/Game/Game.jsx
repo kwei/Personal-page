@@ -25,6 +25,10 @@ const Game = () => {
     const [ score, setScore ] = useState(0)
     const number = useRef([])
 
+    useEffect(() => {
+        number.current = generateAnswer()
+    }, [])
+
     function handleNewGame () {
         setRecord([])
         number.current = generateAnswer()
