@@ -17,6 +17,7 @@ function generateAnswer () {
 }
 
 const Game = () => {
+    const pageRef = useRef(null)
     const inputRef = useRef(null)
     const [ record, setRecord ] = useState([])
     const [ isWin, setIsWin ] = useState(false)
@@ -77,6 +78,7 @@ const Game = () => {
             setIsWin(true)
             setIsAlert(true)
             setScore(record.length)
+            if (pageRef.current) pageRef.current.scroll({ top: 0, behavior: "smooth" })
         }
     }
 
@@ -111,7 +113,7 @@ const Game = () => {
     }
 
     return (
-        <div className="game-page">
+        <div className="game-page" ref={pageRef}>
             <div className="rule">
                 <h2 onClick={handleShowRule}>
                     Rules of Bulls and Cows 
