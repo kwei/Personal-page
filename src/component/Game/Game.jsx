@@ -12,7 +12,6 @@ function generateAnswer () {
       currentIndex--
       [ array[currentIndex], array[randomIndex] ] = [ array[randomIndex], array[currentIndex] ]
     }
-    console.log("generateAnswer: ", array.slice(0, 4))
     return array.slice(0, 4)
 }
 
@@ -25,10 +24,6 @@ const Game = () => {
     const [ showRule, setShowRule ] = useState(false)
     const [ score, setScore ] = useState(0)
     const number = useRef([])
-
-    useEffect(() => {
-        number.current = generateAnswer()
-    }, [])
 
     function handleNewGame () {
         setRecord([])
