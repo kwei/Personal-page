@@ -12,11 +12,16 @@ const Personal = () => {
         switchView(NAVIGATION.PROJECT)
     }
 
+    function handleShowFullScreenImage (e) {
+        const element = e.target
+        window.open(element.src, "Image", 'width=element.style.width,height=element.style.height,resizable=1')
+    }
+
     return (
         <div className="personal-page">
             <div className="card">
                 <div className="profile">
-                    <img alt="" src={"./images/profile-photo.jpg"}></img>
+                    <img onClick={handleShowFullScreenImage} alt="" src={"./images/profile-photo.jpg"}></img>
                     <div className="name">
                         <div className="last-name">YEH</div>
                         <div className="first-name">KAI-WEI</div>
