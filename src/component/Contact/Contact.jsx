@@ -7,6 +7,10 @@ import { MdContentCopy, MdCheck } from "react-icons/md"
 import Toast from "../Toast/Toast.jsx"
 
 const MY_EMAIL = "a0979597291@gmail.com"
+const SMTP_HOST = "smtp.elasticemail.com"
+const SMTP_PORT = "2525"
+const SMTP_USERNAME = "a0979597291@gmail.com"
+const SMTP_PASSWORD = "D03E8EC7529125BAA286A1EB93B3D1382770"
 
 const Contact = () => {
     const { switchView } = useContext(MainPageContext)
@@ -17,7 +21,7 @@ const Contact = () => {
     const toastRef = useRef(null)
     const [ errorForm, setErrorForm ] = useState({ name: false, email: false })
 
-    function handleSendEmail () {
+    async function handleSendEmail () {
         if (!nameRef.current || !mailRef.current || !msgRef.current || !sendRef.current) return false
         let name = nameRef.current.value
         if (name === "") {
@@ -41,9 +45,33 @@ const Contact = () => {
         }
         let msg = msgRef.current.value
         if (msg === "") msg = "as subject"
-        const mailString = `mailto:${MY_EMAIL}?subject=${name}來訊&body=您好，這是${name}。%0D%0A%0D%0A訊息：${msg}%0D%0A%0D%0A請用信箱"${mail}"與我聯繫，謝謝!`
-        sendRef.current.href = mailString
-        sendRef.current.click()
+        await Email.send({
+            Host: SMTP_HOST,
+            Port: SMTP_PORT,
+            Username: SMTP_USERNAME,
+            Password: SMTP_PASSWORD,
+            To: MY_EMAIL,
+            From: MY_EMAIL,
+            Subject: `${name}來訊`,
+            Body: `您好，<br><br>這是來自${name}的訊息：${msg}<br><br>對方信箱為${mail}`,
+        }).then(message => {
+            console.log("Mail to ", MY_EMAIL, message)
+        })
+        await Email.send({
+            Host: SMTP_HOST,
+            Port: SMTP_PORT,
+            Username: SMTP_USERNAME,
+            Password: SMTP_PASSWORD,
+            To: mail,
+            From: MY_EMAIL,
+            Subject: `感謝您的來訊`,
+            Body: `<strong>感謝您的來訊，我們會盡速回覆您!</strong>`,
+        }).then(message => {
+            console.log("Mail to ", mail, message)
+        })
+        nameRef.current.value = ""
+        mailRef.current.value = ""
+        msgRef.current.value = ""
         return false
     }
 
