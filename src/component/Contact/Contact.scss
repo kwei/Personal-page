@@ -13,18 +13,19 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    width: calc(90% - 3rem);
+    width: calc(90% - 4rem);
+    gap: 1rem;
     height: auto;
     margin: auto;
     border-radius: 0.5rem;
     background-color: var(--black);
-    padding: 1.5rem;
+    padding: 2rem;
 }
 .contact-page > .contact-card > div {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: calc((100% - 1rem) / 2);
 }
 
 .contact-info {
@@ -36,13 +37,17 @@
         gap: 0.5rem;
         span {
             background-color: var(--primary);
-            padding: 5px 8px;
+            width: 80px;
+            height: 30px;
+            text-align: center;
+            line-height: 32px;
             border-radius: 0.5rem;
             font-size: small;
             color: var(--black);
         }
         a {
             font-size: medium;
+            flex: 1;
             color: var(--text);
             text-decoration: none;
             &:hover {
@@ -53,6 +58,7 @@
             }
         }
         svg {
+            width: 16px;
             cursor: pointer;
             color: var(--text);
             &:hover {
@@ -177,16 +183,22 @@
         & > div {
             position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            width: 100%;
             gap: 0.5rem;
             span {
                 background-color: var(--primary);
-                padding: 5px 8px;
+                width: 80px;
+                height: 30px;
+                text-align: center;
+                line-height: 32px;
                 border-radius: 0.5rem;
                 font-size: small;
                 color: var(--black);
             }
             a {
+                flex: 1;
                 font-size: medium;
                 color: var(--text);
                 text-decoration: none;
@@ -198,6 +210,7 @@
                 }
             }
             svg {
+                width: 16px;
                 cursor: pointer;
                 color: var(--text);
                 &:hover {

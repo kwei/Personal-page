@@ -86,7 +86,7 @@ const Contact = () => {
                         <MdContentCopy onClick={() => handleCopy("kw_yeh@cyberlink.com")}></MdContentCopy>
                     </div>
                     <div className="work-address">
-                        <span>公司地址</span>
+                        <span>公司的地址</span>
                         <a href="https://goo.gl/maps/7wGh56UtNpg7SYQL9">231 新北市新店區民權路 100 號 15 樓</a>
                         <MdContentCopy onClick={() => handleCopy("231 新北市新店區民權路 100 號 15 樓")}></MdContentCopy>
                     </div>
