@@ -1,0 +1,57 @@
+.toast {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    top: 0.5rem;
+    right: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--black);
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    animation: slideInToast 0.3s ease-in-out;
+    .icon {
+        position: relative;
+        display: flex;
+        border-radius: 50%;
+        background-color: var(--text);
+        padding: 2px;
+        svg {
+            color: var(--black);
+        }
+    }
+    .msg {
+        position: relative;
+        display: inline-block;
+        color: var(--text);
+        font-size: medium;
+    }
+    .btn-close {
+        position: relative;
+        display: flex;
+        width: 18px;
+        height: 18px;
+        svg {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            color: var(--text);
+            cursor: pointer;
+            &:hover {
+                color: var(--primary)
+            }
+            &:active {
+                color: var(--info)
+            }
+        }
+    }
+}
+
+@keyframes slideInToast {
+    0% {
+        right: -100%;
+    }
+    100% {
+        right: 0.5rem
+    }
+}

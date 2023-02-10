@@ -6,6 +6,7 @@
     width: calc(100% - 3rem);
     height: calc(100% - 3rem);
     padding: 1.5rem;
+    overflow-x: hidden;
 }
 .contact-page > .contact-card {
     position: relative;
@@ -28,20 +29,44 @@
 
 .contact-info {
     gap: 1rem;
+    & > div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        span {
+            background-color: var(--primary);
+            padding: 5px 8px;
+            border-radius: 0.5rem;
+            font-size: small;
+            color: var(--black);
+        }
+        a {
+            font-size: medium;
+            color: var(--text);
+            text-decoration: none;
+            &:hover {
+                color: var(--info);
+            }
+            &:active {
+                color: var(--highlight);
+            }
+        }
+        svg {
+            cursor: pointer;
+            color: var(--text);
+            &:hover {
+                color: var(--info);
+            }
+            &:active {
+                color: var(--highlight);
+            }
+        }
+    }
     .name {
-        position: relative;
+        color: var(--text);
         font-size: larger;
-        color: var(--text);
-    }
-    .email {
-        position: relative;
-        font-size: medium;
-        color: var(--text);
-    }
-    .work-address {
-        position: relative;
-        font-size: medium;
-        color: var(--text);
+        font-weight: 600;
     }
 }
 
@@ -85,6 +110,10 @@
             border: 1px solid var(--black);
             background-color: whitesmoke;
             resize: none;
+            font-size: small;
+        }
+        .errorMsg {
+            color: var(--danger);
             font-size: small;
         }
     }
@@ -145,20 +174,44 @@
     
     .contact-info {
         gap: 1rem;
+        & > div {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            span {
+                background-color: var(--primary);
+                padding: 5px 8px;
+                border-radius: 0.5rem;
+                font-size: small;
+                color: var(--black);
+            }
+            a {
+                font-size: medium;
+                color: var(--text);
+                text-decoration: none;
+                &:hover {
+                    color: var(--info);
+                }
+                &:active {
+                    color: var(--highlight);
+                }
+            }
+            svg {
+                cursor: pointer;
+                color: var(--text);
+                &:hover {
+                    color: var(--info);
+                }
+                &:active {
+                    color: var(--highlight);
+                }
+            }
+        }
         .name {
-            position: relative;
+            color: var(--text);
             font-size: larger;
-            color: var(--text);
-        }
-        .email {
-            position: relative;
-            font-size: medium;
-            color: var(--text);
-        }
-        .work-address {
-            position: relative;
-            font-size: medium;
-            color: var(--text);
+            font-weight: 600;
         }
     }
     
