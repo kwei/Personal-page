@@ -19,8 +19,8 @@ export function yyyymmdd (date) {
     return [date.getFullYear(), (mm > 9? '' : '0') + mm, (dd > 9? '' : '0') + dd].join('')
 }
 
-// export const STOCK_INFO_API = "/stock/api/getStockInfo.jsp"
-export const STOCK_INFO_API = "https://mis.twse.com.tw/exchangeReport/STOCK_DAY"
+export const STOCK_INFO_API = "/stock/api/getStockInfo.jsp"
+// export const STOCK_INFO_API = "https://mis.twse.com.tw/exchangeReport/STOCK_DAY"
 export async function fetchStockInfo (code) {
     const apiUrl = STOCK_INFO_API + `?ex_ch=tse_${code}.tw&json=1&delay=0`
     return await fetch(apiUrl)
@@ -35,8 +35,8 @@ export async function fetchStockInfo (code) {
     })
 }
 
-// export const STOCK_EXCHANGE_API = "/exchangeReport/STOCK_DAY"
-export const STOCK_EXCHANGE_API = "https://www.twse.com.tw/exchangeReport/STOCK_DAY"
+export const STOCK_EXCHANGE_API = "/exchangeReport/STOCK_DAY"
+// export const STOCK_EXCHANGE_API = "https://www.twse.com.tw/exchangeReport/STOCK_DAY"
 export async function fetchStockExchange (date, code) {
     return await fetch(STOCK_EXCHANGE_API + `?response=json&date=${date}&stockNo=${code}`)
     .then(res => {
