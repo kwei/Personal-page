@@ -12,51 +12,60 @@ const SEARCH_TYPES = Object.freeze({
    DATE: "日期"
 })
 
+const quotationConfig = {
+    type: 'bar',
+    data: {},
+    options: {
+        indexAxis: 'y',
+        elements: { bar: { borderWidth: 2 } },
+        responsive: true,
+        scales: {
+            x: { grid: { display: false } },
+            y: { grid: { display: false } }
+        }
+    }
+}
+
+const initStockInfo = {
+    "openingPrice": "",
+    "highestPrice": "",
+    "lowestPrice": "",
+    "upperBoundPrice": "",
+    "lowerBoundPrice": "",
+    "stockCode": "股票代碼",
+    "stockName": "股票名稱",
+    "stockFullName": "股票全名",
+    "finalPrice": "市值",
+    "currentTurnOver": "",
+    "cumulativeTurnOver": "",
+    "buyPriceArray": "1_2_3_4_5_",
+    "buyAmountArray": "40_20_10_40_30_",
+    "salePriceArray": "2_3_4_5_6_",
+    "saleAmountArray": "10_20_30_20_10_",
+    "yesterdayPrice": ""
+}
+
 const Stock = () => {
     const [ searchType, setSearchType ] = useState("STOCK_CODE")
     const [ showSearchTypeOption, setShowSearchTypeOption ] = useState(false)
     const searchRef = useRef(null)
     const quotationBuyRef = useRef(null)
     const quotationSaleRef = useRef(null)
+    const curveRef = useRef(null)
     const quotationBuyCanvas = useRef(null)
     const quotationSaleCanvas = useRef(null)
-    const [ stockInfo, setStockInfo ] = useState({
-        "openingPrice": "",
-        "highestPrice": "",
-        "lowestPrice": "",
-        "upperBoundPrice": "",
-        "lowerBoundPrice": "",
-        "stockCode": "股票代碼",
-        "stockName": "股票名稱",
-        "stockFullName": "股票全名",
-        "finalPrice": "市值",
-        "currentTurnOver": "",
-        "cumulativeTurnOver": "",
-        "buyPriceArray": "1_2_3_4_5_",
-        "buyAmountArray": "10_20_30_40_50_",
-        "salePriceArray": "2_3_4_5_6_",
-        "saleAmountArray": "10_20_30_20_10_",
-        "yesterdayPrice": ""
-    })
+    const curveCanvas = useRef(null)
+    
+    const [ stockInfo, setStockInfo ] = useState(initStockInfo)
 
     useEffect(() => {
-        drawGraph(stockInfo)
-        fetchStockExchange("20230223", "2330")
-    }, [stockInfo])
-
-    const config = {
-        type: 'bar',
-        data: {},
-        options: {
-            indexAxis: 'y',
-            elements: { bar: { borderWidth: 2 } },
-            responsive: true,
-            scales: {
-                x: { grid: { display: false } },
-                y: { grid: { display: false } }
+        drawQuotationGraph(stockInfo)
+        fetchStockExchange("20230223", "2330").then(res => {
+            if (res.ok) {
+                console.log(res.data)
             }
-        }
-    }
+        })
+    }, [stockInfo])
 
     function selectSearchType (e) {
         setSearchType(e.target.id)
@@ -67,9 +76,9 @@ const Stock = () => {
         setShowSearchTypeOption(prevState => !prevState)
     }
 
-    function drawGraph (info) {
-        const configBuy = { ...config }
-        const configSale = { ...config }
+    function drawQuotationGraph (info) {
+        const configBuy = { ...quotationConfig }
+        const configSale = { ...quotationConfig }
         const buyLabels = info.buyPriceArray.split("_")
         const buydatas = info.buyAmountArray.split("_")
         buyLabels.pop()
@@ -177,6 +186,11 @@ const Stock = () => {
                         <span className="name">{stockInfo.stockName}</span>
                         <span className="finalPrice">{stockInfo.finalPrice}</span>
                     </div> 
+                    <div className="graph">
+                        <div className="item">
+                            <canvas ref={curveRef} id="curve"></canvas>
+                        </div>
+                    </div>
                     <div className="graph">
                         <div className="item">
                             <canvas ref={quotationBuyRef} id="quotation-buy"></canvas>

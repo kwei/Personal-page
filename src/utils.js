@@ -37,8 +37,7 @@ export async function fetchStockExchange (date, code) {
     })
     .then(res => {
         console.log(res)
-        const data = {}
-        return { ok: true, data: data }
+        return { ok: true, data: { values: res.data, fields: res.fields} }
     }).catch(e => {
         console.error(e)
         return { ok: false, data: null }
