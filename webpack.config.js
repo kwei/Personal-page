@@ -53,7 +53,19 @@ module.exports = {
         ]
     },
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: {
+            "/stock": {
+                target: "https://mis.twse.com.tw",
+                secure: false,
+                changeOrigin: true,
+            },
+            "/exchangeReport": {
+                target: "https://www.twse.com.tw",
+                secure: false,
+                changeOrigin: true,
+            }
+        }
     },
     optimization: {
         minimizer: [
