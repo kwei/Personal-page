@@ -4,7 +4,7 @@ import Card from "../Card/Card.jsx"
 import { useState } from "react"
 import { MdKeyboardArrowDown, MdOutlineSearch } from "react-icons/md"
 import Chart from 'chart.js/auto'
-import { fetchStockInfo, fetchStockExchange } from '../../utils'
+import { fetchStockInfo, fetchStockExchange, yyyymmdd } from '../../utils'
 
 const SEARCH_TYPES = Object.freeze({
    STOCK_NAME: "股市名稱",
@@ -26,15 +26,23 @@ const quotationConfig = {
     }
 }
 
+const exchangeConfig = {
+    type: 'line',
+    data: {},
+    options: {
+        responsive: true,
+    }
+}
+
 const initStockInfo = {
     "openingPrice": "",
     "highestPrice": "",
     "lowestPrice": "",
     "upperBoundPrice": "",
     "lowerBoundPrice": "",
-    "stockCode": "股票代碼",
-    "stockName": "股票名稱",
-    "stockFullName": "股票全名",
+    "stockCode": "2330",
+    "stockName": "台積電",
+    "stockFullName": "",
     "finalPrice": "市值",
     "currentTurnOver": "",
     "cumulativeTurnOver": "",
@@ -60,9 +68,45 @@ const Stock = () => {
 
     useEffect(() => {
         drawQuotationGraph(stockInfo)
-        fetchStockExchange("20230223", "2330").then(res => {
+        fetchStockExchange(yyyymmdd(new Date()), stockInfo.stockCode).then(res => {
             if (res.ok) {
-                console.log(res.data)
+                const data = res.data.values
+                const labels = data.map(d => d[0])
+                const stockAmounts = data.map(d => d[1]).map(v => Number(v.split(",").join("")))
+                const prices = data.map(d => d[2]).map(v => Number(v.split(",").join("")))
+                // const openingPrices = data.map(d => d[3]).map(v => Number(v.split(",").join("")))
+                // const highestPrices = data.map(d => d[4]).map(v => Number(v.split(",").join("")))
+                // const closingPrices = data.map(d => d[5]).map(v => Number(v.split(",").join("")))
+                // const lowestPrices = data.map(d => d[6]).map(v => Number(v.split(",").join("")))
+                // const amounts = data.map(d => d[8]).map(v => Number(v.split(",").join("")))
+                const config = { ...exchangeConfig }
+                stockAmounts.map((v, i) => {
+                    // console.log(prices[i], v)
+                    prices[i] = prices[i] / v
+                })
+                config.data = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "成交金額",
+                            data: prices,
+                            borderColor: "#F97474",
+                            backgroundColor: "#f974747a",
+                            order: 0,
+                            fill: true,
+                        },
+                        // {
+                        //     label: "成交股數",
+                        //     data: stockAmounts,
+                        //     backgroundColor: "#5F85DB",
+                        //     type: "bar",
+                        //     order: 1,
+                        // }
+                    ]
+                }
+                const canvasElement_exchange = curveRef.current
+                if (curveCanvas.value instanceof Chart) curveCanvas.value.destroy()
+                if (canvasElement_exchange) curveCanvas.value = new Chart(canvasElement_exchange.getContext("2d"), config)
             }
         })
     }, [stockInfo])
@@ -80,7 +124,7 @@ const Stock = () => {
         const configBuy = { ...quotationConfig }
         const configSale = { ...quotationConfig }
         const buyLabels = info.buyPriceArray.split("_")
-        const buydatas = info.buyAmountArray.split("_")
+        const buydatas = info.buyAmountArray.split("_").map(v => Number(v))
         buyLabels.pop()
         buydatas.pop()
         // console.log(buyLabels, buydatas)
@@ -89,7 +133,7 @@ const Stock = () => {
             datasets: [{ label: "委買", data: buydatas, backgroundColor: "#F97474" }]
         }
         const saleLabels = info.salePriceArray.split("_")
-        const saledatas = info.saleAmountArray.split("_")
+        const saledatas = info.saleAmountArray.split("_").map(v => Number(v))
         saleLabels.pop()
         saledatas.pop()
         // console.log(saleLabels, saledatas)
@@ -123,7 +167,7 @@ const Stock = () => {
                 break
             case "STOCK_CODE":
                 const { ok, data } = await fetchStockInfo(searchString)
-                console.log({ ok, data })
+                // console.log({ ok, data })
                 if (ok) {
                     const info = {
                         openingPrice: data.o,

@@ -13,6 +13,12 @@ export function validateEmail (email) {
     return regexEmailFormat.test(email)
 }
 
+export function yyyymmdd (date) {
+    const mm = date.getMonth()+1
+    const dd = date.getDate()
+    return [date.getFullYear(), (mm > 9? '' : '0') + mm, (dd > 9? '' : '0') + dd].join('')
+}
+
 export const STOCK_INFO_API = "/stock/api/getStockInfo.jsp"
 export async function fetchStockInfo (code) {
     const apiUrl = STOCK_INFO_API + `?ex_ch=tse_${code}.tw&json=1&delay=0`
@@ -21,8 +27,7 @@ export async function fetchStockInfo (code) {
         if (res.ok) return res.json()
     })
     .then(res => {
-        const data = res.msgArray[0]
-        return { ok: true, data: data }
+        return { ok: true, data: res.msgArray[0] }
     }).catch(e => {
         console.error(e)
         return { ok: false, data: null }
@@ -36,7 +41,6 @@ export async function fetchStockExchange (date, code) {
         if (res.ok) return res.json()
     })
     .then(res => {
-        console.log(res)
         return { ok: true, data: { values: res.data, fields: res.fields} }
     }).catch(e => {
         console.error(e)
