@@ -1,7 +1,6 @@
 import "./Nav.scss"
 import React, { useContext, useRef, useState, useEffect } from "react"
 import { MdOutlineMenu, MdClose, MdHome, MdContacts, MdDashboard, MdAccountCircle } from "react-icons/md"
-import { AiOutlineStock } from "react-icons/ai"
 import { IoGameController } from "react-icons/io5"
 import { NAVIGATION } from "../../utils"
 import { MainPageContext } from "../../context/MainPageContext"
@@ -16,7 +15,6 @@ const Nav = () => {
     const projectNavRef = useRef(null)
     const contactNavRef = useRef(null)
     const gameNavRef = useRef(null)
-    const stockNavRef = useRef(null)
 
     function handleExtendNav () {
         setIsExtend(prevState => {
@@ -41,7 +39,6 @@ const Nav = () => {
         else if (currentView === NAVIGATION.PROJECT) slideBarRef.current.style.top = projectNavRef.current.offsetTop + "px"
         else if (currentView === NAVIGATION.CONTACT) slideBarRef.current.style.top = contactNavRef.current.offsetTop + "px"
         else if (currentView === NAVIGATION.GAME) slideBarRef.current.style.top = gameNavRef.current.offsetTop + "px"
-        else if (currentView === NAVIGATION.STOCK) slideBarRef.current.style.top = stockNavRef.current.offsetTop + "px"
     }, [currentView])
 
     return (
@@ -82,10 +79,6 @@ const Nav = () => {
                 <div ref={gameNavRef} className="game" onClick={(e) => handleNavigating(e, NAVIGATION.GAME)}>
                     <IoGameController></IoGameController>
                     <span>Games</span>
-                </div>
-                <div ref={stockNavRef} className="stock" onClick={(e) => handleNavigating(e, NAVIGATION.STOCK)}>
-                    <AiOutlineStock></AiOutlineStock>
-                    <span>Stock</span>
                 </div>
             </div>
         </div>
