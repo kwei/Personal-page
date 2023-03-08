@@ -4,4 +4,24 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    overflow: hidden
+}
+.page-container::-webkit-scrollbar {
+    width: 5px;
+}
+.page-container::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+    margin: 2px;
+}
+.page-container::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.534);
+}
+.page-container::-webkit-scrollbar-thumb:hover {
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.781);
+}
+.page-container::-webkit-scrollbar-thumb:active {
+    border-radius: 0.5rem;
+    background-color: rgb(128, 128, 128);
 }

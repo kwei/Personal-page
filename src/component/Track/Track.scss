@@ -242,6 +242,7 @@
         padding: 1.5rem;
         gap: 2rem;
         overflow-y: auto;
+        overflow-x: hidden;
     }
     .track-page::-webkit-scrollbar {
         width: 5px;
