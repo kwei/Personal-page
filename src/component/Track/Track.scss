@@ -1,0 +1,274 @@
+.track-page {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 3rem);
+    height: calc(100% - 3rem);
+    padding: 1.5rem;
+    gap: 1rem;
+}
+
+.track-page > .section-header {
+    font-size: large;
+    color: var(--black);
+    font-weight: bold;
+    width: 4rem;
+    height: fit-content;
+    text-align: center;
+    background-color: var(--highlight);
+    border-radius: 0.5rem;
+}
+
+.track-page > .input-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+.track-page > .input-area > label {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 1.5rem;
+    gap: 0.5rem;
+}
+.track-page > .input-area > label > span {
+    background-color: var(--info);
+    border-radius: 0.3rem;
+    width: 3rem;
+    height: 100%;
+    text-align: center;
+}
+.track-page > .input-area > label > select {
+    width: 80px;
+    height: 100%;
+    border-radius: 0.3rem;
+    outline: none;
+    border: 1px solid var(--gray);
+    padding-left: 0.5rem;
+}
+.track-page > .input-area > label > input {
+    width: 160px;
+    height: 100%;
+    border-radius: 0.3rem;
+    outline: none;
+    border: 1px solid var(--gray);
+    padding-left: 0.5rem;
+}
+.track-page > .input-area > label > input::-webkit-outer-spin-button,
+.track-page > .input-area > label > input::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+.track-page > .input-area > .btn {
+    width: 8rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    border: 1px solid var(--gray);
+    background-color: var(--primary);
+    font-weight: 600;
+}
+.track-page > .input-area > .btn:hover {
+    background-color: var(--info);
+}
+
+.track-page > .search-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+.track-page > .search-area > .filter {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+.track-page > .search-area > .filter > label {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 1.5rem;
+    gap: 0.5rem;
+}
+.track-page > .search-area > .filter > label > span {
+    background-color: var(--info);
+    border-radius: 0.3rem;
+    width: 3rem;
+    height: 100%;
+    text-align: center;
+}
+.track-page > .search-area > .filter > label > select {
+    width: 80px;
+    height: 100%;
+    border-radius: 0.3rem;
+    outline: none;
+    border: 1px solid var(--gray);
+    padding-left: 0.5rem;
+}
+.track-page > .search-area > .filter > label > input {
+    width: 160px;
+    height: 100%;
+    border-radius: 0.3rem;
+    outline: none;
+    border: 1px solid var(--gray);
+    padding-left: 0.5rem;
+}
+.track-page > .search-area > .filter > label > input[type=date] {
+    width: 120px;
+}
+.track-page > .search-area > .filter > .default-range {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+    gap: 0.5rem;
+}
+.track-page > .search-area > .filter > .default-range > .btn {
+    background-color: var(--black);
+    border: 1px solid var(--gray);
+    border-radius: 0.3rem;
+    width: 4rem;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    color: var(--text);
+}
+.track-page > .search-area > .filter > .default-range > .btn:hover {
+    background-color: var(--highlight);
+    color: var(--black);
+}
+.track-page > .search-area > .filter > .btn {
+    width: 8rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    border: 1px solid var(--gray);
+    background-color: var(--primary);
+    font-weight: 600;
+}
+.track-page > .search-area > .filter > .btn:hover {
+    background-color: var(--info);
+}
+.track-page > .search-area > .results {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
+    gap: 0.5rem;
+}
+.track-page > .search-area > .results > .list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.track-page > .search-area > .results > .list::-webkit-scrollbar {
+    width: 5px;
+}
+.track-page > .search-area > .results > .list::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+    margin: 2px;
+}
+.track-page > .search-area > .results > .list::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.534);
+}
+.track-page > .search-area > .results > .list::-webkit-scrollbar-thumb:hover {
+    border-radius: 0.5rem;
+    background-color: rgba(128, 128, 128, 0.781);
+}
+.track-page > .search-area > .results > .list::-webkit-scrollbar-thumb:active {
+    border-radius: 0.5rem;
+    background-color: rgb(128, 128, 128);
+}
+.track-page > .search-area > .results > .header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--black);
+    color: var(--text);
+}
+.track-page > .search-area > .results > .header > span {
+    flex: 1;
+    text-align: center;
+}
+.track-page > .search-area > .results > .list > .item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: calc(100% - 1rem);
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--black);
+    color: var(--text);
+}
+.track-page > .search-area > .results > .list > .item > span {
+    width: 66px;
+    text-align: center;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 940px) {
+    .track-page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(100% - 3rem);
+        height: calc(100% - 3rem);
+        padding: 1.5rem;
+        gap: 2rem;
+        overflow-y: auto;
+    }
+    .track-page::-webkit-scrollbar {
+        width: 5px;
+    }
+    .track-page::-webkit-scrollbar-track {
+        border-radius: 0.5rem;
+        margin: 2px;
+    }
+    .track-page::-webkit-scrollbar-thumb {
+        border-radius: 0.5rem;
+        background-color: rgba(128, 128, 128, 0.534);
+    }
+    .track-page::-webkit-scrollbar-thumb:hover {
+        border-radius: 0.5rem;
+        background-color: rgba(128, 128, 128, 0.781);
+    }
+    .track-page::-webkit-scrollbar-thumb:active {
+        border-radius: 0.5rem;
+        background-color: rgb(128, 128, 128);
+    }
+    .track-page > .section-header {
+        font-size: large;
+        color: var(--black);
+        font-weight: bold;
+        width: 100%;
+        background-color: var(--highlight);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
+}
