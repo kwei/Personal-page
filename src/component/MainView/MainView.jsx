@@ -8,6 +8,7 @@ import Home from "../Home/Home.jsx"
 import Contact from "../Contact/Contact.jsx"
 import Game from "../Game/Game.jsx"
 import Track from "../Track/Track.jsx"
+import Stock from "../Stock/Stock.jsx"
 
 const MainView = () => {
     const { currentView } = useContext(MainPageContext)
@@ -26,6 +27,8 @@ const MainView = () => {
                 return <Game></Game>
             case NAVIGATION.TRACK:
                 return <Track></Track>
+            case NAVIGATION.STOCK:
+                return <Stock></Stock>
             default:
                 return <Home></Home>
         }

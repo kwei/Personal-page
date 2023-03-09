@@ -1,0 +1,98 @@
+.stock-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 3rem);
+    height: calc(100% - 3rem);
+    padding: 1.5rem;
+    overflow: auto;
+    gap: 1rem;
+}
+.stock-page > .search-area {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.stock-page > .search-area > input {
+    width: 12rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--black);
+    background-color: var(--text);
+}
+.stock-page > .search-area > input::-webkit-inner-spin-button,
+.stock-page > .search-area > input::-webkit-outter-spin-button {
+    appearance: none;
+    margin: 0;
+}
+.stock-page > .search-area > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--text);
+}
+.stock-page > .search-area > svg:hover {
+    color: var(--highlight);
+}
+
+.stock-page > .results {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.stock-page > .results > .item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 2rem);
+    background-color: var(--black);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+.stock-page > .results > .item > .short-info {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    color: var(--text);
+}
+.stock-page > .results > .item > .short-info > .stockNo {
+    width: 3rem;
+    flex-shrink: 0;
+}
+.stock-page > .results > .item > .short-info > .name {
+    width: calc(100% - 15rem);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+.stock-page > .results > .item > .short-info > .graph {
+    width: 6rem;
+    flex-shrink: 0;
+}
+.stock-page > .results > .item > .short-info > .price {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 6rem;
+    flex-shrink: 0;
+}
+.stock-page > .results > .item > .short-info > .price > span {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.stock-page > .results > .item > .short-info > .price > .change {
+    font-size: small;
+}
+.stock-page > .results > .item > .detail {
+    position: relative;
+}
