@@ -15,7 +15,10 @@ const Stock = () => {
 
     useEffect(() => {
         searchList.map(stockNo => {
-            fetchStockInfo(stockNo)
+            if (!realTimeData[stockNo]) {
+                fetchStockInfo(stockNo)
+                fetchExchangeData(undefined, stockNo)
+            }
         })
         realTimeSync(searchList)
         return () => { stopSync() }
@@ -77,6 +80,7 @@ const Stock = () => {
                         bestAskVolumes: res.data["f"],
                         yesterdayClosingPrice: res.data["y"],
                     })
+                    console.log("setRealTimeData", newState)
                     return newState
                 })
             }
@@ -115,6 +119,7 @@ const Stock = () => {
     }
 
     function handleEnterStockNo (e) {
+        console.log(e.key)
         if (e.key === "Enter") handleAddSearch2List()
     }
 
@@ -135,6 +140,7 @@ const Stock = () => {
                         if (stockInfo.length === 0 || exchangeData.length === 0 ) return <React.Fragment key={code}></React.Fragment>
                         const change = str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice) - str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice)
                         const ratio = (change / str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice))*100
+                        console.log(code, realTimeData, staticData)
                         return <div key={code} className="item">
                             <div className="short-info">
                                 <span className="stockNo">{stockInfo[stockInfo.length-1].code}</span>
@@ -146,12 +152,15 @@ const Stock = () => {
                                     </Sparklines>
                                 </span>
                                 <div className="price" style={{ color: change>0?"var(--danger)":"var(--success)" }}>
-                                    <span className="value">{stockInfo[stockInfo.length-1].currentTransactionPrice}</span>
+                                    <span className="value">
+                                        {str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice).toFixed(2)}
+                                    </span>
                                     <span className="change">
                                         { change>0 && <MdArrowDropUp size={14}></MdArrowDropUp> }
                                         { change<0 && <MdArrowDropDown size={14}></MdArrowDropDown> }
                                         { change===0 && "-" }
-                                        { change!==0 && `${change} (${ratio.toFixed(2)}%)` }
+                                        { change>0 && `${change.toFixed(2)} (+${ratio.toFixed(2)}%)` }
+                                        { change<0 && `${change.toFixed(2)} (-${ratio.toFixed(2)}%)` }
                                     </span>
                                 </div>
                             </div>
