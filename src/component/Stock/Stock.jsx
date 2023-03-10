@@ -9,8 +9,8 @@ const Stock = () => {
     const stockNoInputRef = useRef(null)
     const [ realTimeData, setRealTimeData ] = useState({})
     const [ staticData, setStaticData ] = useState({})
-    const [ searchList, setSearchList ] = useState(["2330", "2454", "0050", "0056", "00878"])
-    const [ showDetail, setShowDetail ] = useState({ ["2330"]: false, ["2454"]: false, ["0050"]: false, ["0056"]: false, ["00878"]: false })
+    const [ searchList, setSearchList ] = useState(["2330", "2454", "2317", "2603", "0050", "0056", "00878"])
+    const [ showDetail, setShowDetail ] = useState({ ["2330"]: false, ["2454"]: false, ["2317"]: false, ["2603"]: false, ["0050"]: false, ["0056"]: false, ["00878"]: false })
     const interval = useRef(null)
 
     useEffect(() => {
