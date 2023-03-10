@@ -147,6 +147,8 @@ const Stock = () => {
                             const num = str2Num(data.currentTransactionPrice)
                             if (num !== 0) return num
                         })
+                        if (realTimeValue.length === 0) realTimeValue = new Array(20).fill(0)
+                        console.log(code, "realTimeValue", realTimeValue)
                         const exchangeData = staticData[code]
                         if (!exchangeData) return <React.Fragment key={code}></React.Fragment>
                         if (stockInfo.length === 0 || exchangeData.length === 0 ) return <React.Fragment key={code}></React.Fragment>
