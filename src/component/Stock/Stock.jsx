@@ -32,10 +32,11 @@ const Stock = () => {
     function fetchExchangeData (date = yyyymmdd(new Date(), '/'), code = "2330") {
         getStockExchangeData(date, code).then(res => {
             if (res.ok) {
-                console.log("getStockExchangeData: ", res.data)
+                // console.log("getStockExchangeData: ", res)
                 setStaticData((prevState) => {
                     const newState = { ...prevState }
                     if (!newState[code]) newState[code] = []
+                    if (!res.data.data) return prevState
                     res.data.data.map(data => {
                         newState[code].push({
                             date: data[0],
@@ -58,10 +59,11 @@ const Stock = () => {
     function fetchStockInfo (code = "2330") {
         getStockInfo(code).then(res => {
             if (res.ok) {
-                console.log("getStockInfo: ", res.data)
+                // console.log("getStockInfo: ", res)
                 setRealTimeData((prevState) => {
                     const newState = { ...prevState }
                     if (!newState[code]) newState[code] = []
+                    if (!res.data) return prevState
                     newState[code].push({
                         openingPrice: res.data["o"],
                         highestPrice: res.data["h"],
@@ -80,7 +82,7 @@ const Stock = () => {
                         bestAskVolumes: res.data["f"],
                         yesterdayClosingPrice: res.data["y"],
                     })
-                    console.log("setRealTimeData", newState)
+                    // console.log("setRealTimeData", newState)
                     return newState
                 })
             }
@@ -120,7 +122,7 @@ const Stock = () => {
     }
 
     function handleEnterStockNo (e) {
-        console.log(e.key)
+        // console.log(e.key)
         if (e.key === "Enter") handleAddSearch2List()
     }
 
@@ -148,7 +150,7 @@ const Stock = () => {
                             if (num !== 0) return num
                         })
                         if (realTimeValue.length === 0) realTimeValue = new Array(20).fill(0)
-                        console.log(code, "realTimeValue", realTimeValue)
+                        {/* console.log(code, "realTimeValue", realTimeValue) */}
                         const exchangeData = staticData[code]
                         if (!exchangeData) return <React.Fragment key={code}></React.Fragment>
                         if (stockInfo.length === 0 || exchangeData.length === 0 ) return <React.Fragment key={code}></React.Fragment>
@@ -163,8 +165,8 @@ const Stock = () => {
                         const totalAskVolume = bestAskVolumes.reduce((partialSum, a) => partialSum + a, 0)
                         const bibRatio = (( totalBibVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
                         const askRatio = (( totalAskVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
-                        console.log(code, "Bid", bestBidPrices, bestBibVolumes)
-                        console.log(code, "Ask", bestAskPrices, bestAskVolumes)
+                        {/* console.log(code, "Bid", bestBidPrices, bestBibVolumes)
+                        console.log(code, "Ask", bestAskPrices, bestAskVolumes) */}
                         return <div key={code} className="item">
                             <div className="short-info" onClick={() => handleshowDetail(code)}>
                                 <span className="stockNo">{stockInfo[stockInfo.length-1].code}</span>

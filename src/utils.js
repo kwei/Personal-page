@@ -72,6 +72,7 @@ export async function getStockInfo (code = "2330") {
         return await fetch(STOCK_REALTIME_INFO_URL + code)
         .then(async res => ({ ok: res.ok, data: res.ok? await res.json():res.statusText }))
         .then(async res => {
+            // console.log(res)
             return { ok: res.ok, data: await res.data.msgArray? await res.data.msgArray[0]:[] }
         })
     } catch (error) {
@@ -84,6 +85,7 @@ export async function getStockExchangeData (date = yyyymmdd(new Date(), '/'), co
     try {
         return await fetch(STOCK_EXCHANGE_DATA_URL + `?response=json&date=${date}&stockNo=${code}`)
         .then(async res => {
+            // console.log(res)
             return { ok: res.ok, data: res.ok? await res.json():res.statusText }
         })
     } catch (error) {
