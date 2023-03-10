@@ -3,14 +3,15 @@ import React, { useEffect, useRef } from "react"
 import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines'
 import Card from "../Card/Card.jsx"
 import { MdArrowDropDown, MdArrowDropUp, MdSearch } from "react-icons/md"
-import { getStockExchangeData, getStockInfo, isStockUpdateInterval, str2Num, yyyymmdd } from "../../utils"
+import { getStockExchangeData, getStockInfo, isStockUpdateInterval, str2Arr, str2Num, yyyymmdd } from "../../utils"
 import { useState } from "react"
 
 const Stock = () => {
     const stockNoInputRef = useRef(null)
     const [ realTimeData, setRealTimeData ] = useState({})
     const [ staticData, setStaticData ] = useState({})
-    const [ searchList, setSearchList ] = useState(["2330"])
+    const [ searchList, setSearchList ] = useState(["2330", "2454", "0050", "0056", "00878"])
+    const [ showDetail, setShowDetail ] = useState(false)
     const interval = useRef(null)
 
     useEffect(() => {
@@ -110,6 +111,7 @@ const Stock = () => {
     function handleAddSearch2List () {
         if (!stockNoInputRef.current) return false
         const sotckNo = stockNoInputRef.current.value
+        stockNoInputRef.current.value = ""
         if (sotckNo === "") return false
         setSearchList(prevState => {
             const newState = [ ...prevState ]
@@ -123,6 +125,10 @@ const Stock = () => {
         if (e.key === "Enter") handleAddSearch2List()
     }
 
+    function handleshowDetail () {
+        setShowDetail(prevState => !prevState)
+    }
+
     return (
         <div className="scrollable stock-page">
             <div className="search-area">
@@ -134,15 +140,26 @@ const Stock = () => {
                     Object.keys(realTimeData).map(code => {
                         const stockInfo = realTimeData[code]
                         if (!stockInfo) return <React.Fragment key={code}></React.Fragment>
-                        const realTimeValue = stockInfo.map(data => str2Num(data.currentTransactionPrice))
+                        let realTimeValue = stockInfo.map(data => {
+                            const num = str2Num(data.currentTransactionPrice)
+                            if (num !== 0) return num
+                        })
                         const exchangeData = staticData[code]
                         if (!exchangeData) return <React.Fragment key={code}></React.Fragment>
                         if (stockInfo.length === 0 || exchangeData.length === 0 ) return <React.Fragment key={code}></React.Fragment>
                         const change = str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice) - str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice)
-                        const ratio = (change / str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice))*100
-                        console.log(code, realTimeData, staticData)
+                        const ratio = (Math.abs(change) / str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice))*100
+                        const currentPrice = str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice).toFixed(2)
+                        const bestBidPrices = str2Arr(stockInfo[stockInfo.length-1].bestBidPrices, "_")
+                        const bestBibVolumes = str2Arr(stockInfo[stockInfo.length-1].bestBibVolumes, "_")
+                        const totalBibVolume = bestBibVolumes.reduce((partialSum, a) => partialSum + a, 0)
+                        const bestAskPrices = str2Arr(stockInfo[stockInfo.length-1].bestAskPrices, "_")
+                        const bestAskVolumes = str2Arr(stockInfo[stockInfo.length-1].bestAskVolumes, "_")
+                        const totalAskVolume = bestAskVolumes.reduce((partialSum, a) => partialSum + a, 0)
+                        const bibRatio = (( totalBibVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
+                        const askRatio = (( totalAskVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
                         return <div key={code} className="item">
-                            <div className="short-info">
+                            <div className="short-info" onClick={handleshowDetail}>
                                 <span className="stockNo">{stockInfo[stockInfo.length-1].code}</span>
                                 <span className="name">{stockInfo[stockInfo.length-1].name}</span>
                                 <span className="graph">
@@ -151,20 +168,138 @@ const Stock = () => {
                                         <SparklinesSpots />
                                     </Sparklines>
                                 </span>
-                                <div className="price" style={{ color: change>0?"var(--danger)":"var(--success)" }}>
+                                <div className="price" style={{ color: (currentPrice === "0.00" || change===0)? "var(--text)":change>0?"var(--danger)":"var(--success)" }}>
                                     <span className="value">
-                                        {str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice).toFixed(2)}
+                                        {currentPrice !== "0.00"? currentPrice:"暫無資訊"}
                                     </span>
                                     <span className="change">
-                                        { change>0 && <MdArrowDropUp size={14}></MdArrowDropUp> }
-                                        { change<0 && <MdArrowDropDown size={14}></MdArrowDropDown> }
-                                        { change===0 && "-" }
-                                        { change>0 && `${change.toFixed(2)} (+${ratio.toFixed(2)}%)` }
-                                        { change<0 && `${change.toFixed(2)} (-${ratio.toFixed(2)}%)` }
+                                        { currentPrice === "0.00" && "-"}
+                                        { currentPrice !== "0.00" && change>0 && <MdArrowDropUp size={14}></MdArrowDropUp> }
+                                        { currentPrice !== "0.00" && change<0 && <MdArrowDropDown size={14}></MdArrowDropDown> }
+                                        { currentPrice !== "0.00" && change===0 && "-" }
+                                        { currentPrice !== "0.00" && change>0 && `${change.toFixed(2)} (+${ratio.toFixed(2)}%)` }
+                                        { currentPrice !== "0.00" && change<0 && `${change.toFixed(2)} (-${ratio.toFixed(2)}%)` }
                                     </span>
                                 </div>
                             </div>
-                            <div className="detail"></div>
+                            <div className="detail" style={{ 
+                                height: showDetail? "290px" : "0px",
+                                marginTop: showDetail? "1rem" : "0px",
+                            }}>
+                                <div className="info">
+                                    <div className="item">
+                                        <span>開盤</span>
+                                        <span>{str2Num(stockInfo[0].openingPrice).toFixed(2)}</span>
+                                    </div>
+                                    <div className="item">
+                                        <span>最高</span>
+                                        <span>{str2Num(stockInfo[0].highestPrice).toFixed(2)}</span>
+                                    </div>
+                                    <div className="item">
+                                        <span>最低</span>
+                                        <span>{str2Num(stockInfo[0].lowestPrice).toFixed(2)}</span>
+                                    </div>
+                                    <div className="item">
+                                        <span>跌停</span>
+                                        <span>{str2Num(stockInfo[0].limitUpPrice).toFixed(2)}</span>
+                                    </div>
+                                    <div className="item">
+                                        <span>漲停</span>
+                                        <span>{str2Num(stockInfo[0].limitDownPrice).toFixed(2)}</span>
+                                    </div>
+                                </div>
+                                <div className="best5">
+                                    <div className="title"><span>五檔報價</span></div>
+                                    <div className="ratio-bar">
+                                        <div className="text" style={{ color: "var(--danger)" }}>
+                                            <span>委買</span>
+                                        </div>
+                                        <div className="ratio" style={{ 
+                                            color: "var(--text)", 
+                                            backgroundColor: "var(--danger)" ,
+                                            width: `calc((100% - 4rem) * ${bibRatio})`
+                                            }}
+                                        >
+                                            <span>{bibRatio}%</span>
+                                        </div>
+                                        <div className="ratio" style={{ 
+                                            color: "var(--text)", 
+                                            backgroundColor: "var(--success)",
+                                            width: `calc((100% - 4rem) * ${askRatio})`
+                                            }}
+                                        >
+                                            <span>{askRatio}%</span>
+                                        </div>
+                                        <div className="text" style={{ color: "var(--success)" }}>
+                                            <span>委賣</span>
+                                        </div>
+                                    </div>
+                                    <div className="table">
+                                        <div className="number-list">
+                                            { bestBibVolumes.length > 0 && 
+                                                bestBibVolumes.map(value => {
+                                                    return <div key={`${code}-bib-volume-${value.toFixed(0)}`} className="number">
+                                                        {value.toFixed(0)}
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        <div className="bar-list">
+                                            { bestBibVolumes.length > 0 && 
+                                                bestBibVolumes.map(value => {
+                                                    return <div key={`${code}-bib-bar-${value.toFixed(0)}`} className="bar"
+                                                            style={{ justifyContent: "flex-end" }}
+                                                        >
+                                                        <span style={{ 
+                                                            width: `${(value / totalBibVolume)*100}%`,
+                                                            backgroundColor: "var(--danger)"
+                                                        }}></span>
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        <div className="price-list">
+                                            { bestBidPrices.length > 0 && 
+                                                bestBidPrices.map(value => {
+                                                    return <div key={`${code}-bib-price-${value.toFixed(2)}`} className="number" style={{ textAlign: "end" }}>
+                                                        {value.toFixed(2)}
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        <div className="price-list">
+                                            { bestAskPrices.length > 0 && 
+                                                bestAskPrices.map(value => {
+                                                    return <div key={`${code}-ask-price-${value.toFixed(2)}`} className="number">
+                                                        {value.toFixed(2)}
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        <div className="bar-list">
+                                            { bestAskVolumes.length > 0 && 
+                                                bestAskVolumes.map(value => {
+                                                    return <div key={`${code}-ask-bar-${value.toFixed(0)}`} className="bar">
+                                                        <span style={{ 
+                                                            width: `${(value / totalAskVolume)*100}%`,
+                                                            backgroundColor: "var(--success)"
+                                                        }}></span>
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                        <div className="number-list">
+                                            { bestAskVolumes.length > 0 && 
+                                                bestAskVolumes.map(value => {
+                                                    return <div key={`ask-volume-${value.toFixed(0)}`} className="number" style={{ justifyContent: "flex-end" }}>
+                                                        {value.toFixed(0)}
+                                                    </div>
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     })
                 }

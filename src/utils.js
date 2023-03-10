@@ -22,10 +22,18 @@ export function yyyymmdd (date, composer = '') {
 
 export function str2Num (str) {
     try {
-        return Number(str)
+        const num = Number(str)
+        if (num) return num
+        return 0
     } catch (error) {
         return 0
     }
+}
+
+export function str2Arr (str, decomposer = "_") {
+    const arr = str.split(decomposer)
+    arr.pop()
+    return arr.map(value => str2Num(value))
 }
 
 export function isStockUpdateInterval () {
