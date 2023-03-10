@@ -1,7 +1,6 @@
 import "./Stock.scss"
 import React, { useEffect, useRef } from "react"
 import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines'
-import Card from "../Card/Card.jsx"
 import { MdArrowDropDown, MdArrowDropUp, MdSearch } from "react-icons/md"
 import { getStockExchangeData, getStockInfo, isStockUpdateInterval, str2Arr, str2Num, yyyymmdd } from "../../utils"
 import { useState } from "react"
@@ -11,7 +10,7 @@ const Stock = () => {
     const [ realTimeData, setRealTimeData ] = useState({})
     const [ staticData, setStaticData ] = useState({})
     const [ searchList, setSearchList ] = useState(["2330", "2454", "0050", "0056", "00878"])
-    const [ showDetail, setShowDetail ] = useState(false)
+    const [ showDetail, setShowDetail ] = useState({ ["2330"]: false, ["2454"]: false, ["0050"]: false, ["0056"]: false, ["00878"]: false })
     const interval = useRef(null)
 
     useEffect(() => {
@@ -125,8 +124,12 @@ const Stock = () => {
         if (e.key === "Enter") handleAddSearch2List()
     }
 
-    function handleshowDetail () {
-        setShowDetail(prevState => !prevState)
+    function handleshowDetail (code) {
+        setShowDetail(prevState => {
+            const newState = { ...prevState }
+            newState[code] = !newState[code]
+            return newState
+        })
     }
 
     return (
@@ -158,8 +161,10 @@ const Stock = () => {
                         const totalAskVolume = bestAskVolumes.reduce((partialSum, a) => partialSum + a, 0)
                         const bibRatio = (( totalBibVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
                         const askRatio = (( totalAskVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
+                        console.log(code, "Bid", bestBidPrices, bestBibVolumes)
+                        console.log(code, "Ask", bestAskPrices, bestAskVolumes)
                         return <div key={code} className="item">
-                            <div className="short-info" onClick={handleshowDetail}>
+                            <div className="short-info" onClick={() => handleshowDetail(code)}>
                                 <span className="stockNo">{stockInfo[stockInfo.length-1].code}</span>
                                 <span className="name">{stockInfo[stockInfo.length-1].name}</span>
                                 <span className="graph">
@@ -183,8 +188,8 @@ const Stock = () => {
                                 </div>
                             </div>
                             <div className="detail" style={{ 
-                                height: showDetail? "290px" : "0px",
-                                marginTop: showDetail? "1rem" : "0px",
+                                height: showDetail[code]? "290px" : "0px",
+                                marginTop: showDetail[code]? "1rem" : "0px",
                             }}>
                                 <div className="info">
                                     <div className="item">

@@ -171,6 +171,9 @@
     gap: 0.5rem;
     width: 2.5rem;
 }
+.stock-page > .results > .item > .detail > .best5 > .table > .number-list > div {
+    height: 1rem;
+}
 .stock-page > .results > .item > .detail > .best5 > .table > .bar-list {
     position: relative;
     display: flex;
@@ -192,4 +195,7 @@
     gap: 0.5rem;
     width: 3rem;
     color: var(--success);
+}
+.stock-page > .results > .item > .detail > .best5 > .table > .price-list > div {
+    height: 1rem;
 }
