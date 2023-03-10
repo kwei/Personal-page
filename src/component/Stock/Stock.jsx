@@ -156,7 +156,6 @@ const Stock = () => {
                         if (stockInfo.length === 0 || exchangeData.length === 0 ) return <React.Fragment key={code}></React.Fragment>
                         const change = str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice) - str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice)
                         const ratio = (Math.abs(change) / str2Num(stockInfo[stockInfo.length-1].yesterdayClosingPrice))*100
-                        const currentPrice = str2Num(stockInfo[stockInfo.length-1].currentTransactionPrice).toFixed(2)
                         const bestBidPrices = str2Arr(stockInfo[stockInfo.length-1].bestBidPrices, "_")
                         const bestBibVolumes = str2Arr(stockInfo[stockInfo.length-1].bestBibVolumes, "_")
                         const totalBibVolume = bestBibVolumes.reduce((partialSum, a) => partialSum + a, 0)
@@ -165,6 +164,7 @@ const Stock = () => {
                         const totalAskVolume = bestAskVolumes.reduce((partialSum, a) => partialSum + a, 0)
                         const bibRatio = (( totalBibVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
                         const askRatio = (( totalAskVolume / (totalBibVolume+totalAskVolume) ) * 100).toFixed(1)
+                        const currentPrice = str2Num(bestAskPrices[0]).toFixed(2)
                         {/* console.log(code, "Bid", bestBidPrices, bestBibVolumes)
                         console.log(code, "Ask", bestAskPrices, bestAskVolumes) */}
                         return <div key={code} className="item">
