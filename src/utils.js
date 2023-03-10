@@ -68,17 +68,25 @@ export async function getTrack () {
 
 const STOCK_REALTIME_INFO_URL = "https://script.google.com/macros/s/AKfycbxBjGB5nFcZbXNJyj_L9tDuUM_fzilLpONPQp0fCeZAKl_1E55XnzALhuuBflIkTSr-Xg/exec?stockNo="
 export async function getStockInfo (code = "2330") {
-    return await fetch(STOCK_REALTIME_INFO_URL + code)
-    .then(async res => ({ ok: res.ok, data: res.ok? await res.json():res.statusText }))
-    .then(async res => {
-        return { ok: res.ok, data: await res.data.msgArray? await res.data.msgArray[0]:[] }
-    })
+    try {
+        return await fetch(STOCK_REALTIME_INFO_URL + code)
+        .then(async res => ({ ok: res.ok, data: res.ok? await res.json():res.statusText }))
+        .then(async res => {
+            return { ok: res.ok, data: await res.data.msgArray? await res.data.msgArray[0]:[] }
+        })
+    } catch (error) {
+        return { ok: false, data: null }
+    }
 }
 
 const STOCK_EXCHANGE_DATA_URL = "https://script.google.com/macros/s/AKfycbzOnMGQO8p3dZ-FvgrHcJTklElTtBRePnnugMvr7twtk4T-RHdlrhSmEWAk4QwdOBBz/exec"
 export async function getStockExchangeData (date = yyyymmdd(new Date(), '/'), code = "2330") {
-    return await fetch(STOCK_EXCHANGE_DATA_URL + `?response=json&date=${date}&stockNo=${code}`)
-    .then(async res => {
-        return { ok: res.ok, data: res.ok? await res.json():res.statusText }
-    })
+    try {
+        return await fetch(STOCK_EXCHANGE_DATA_URL + `?response=json&date=${date}&stockNo=${code}`)
+        .then(async res => {
+            return { ok: res.ok, data: res.ok? await res.json():res.statusText }
+        })
+    } catch (error) {
+        return { ok: false, data: null }
+    }
 }
